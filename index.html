@@ -1,1 +1,614 @@
-<h1>Hello </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MTJS JS Runtime - A high-performance JavaScript runtime for server-side applications with exceptional HTTP processing speed, built-in RPC, and Telnet-based management.">
+  <meta name="keywords" content="JavaScript runtime, server-side JavaScript, MTJS, high-performance backend, RPC, Telnet, GitHub Pages">
+  <meta name="robots" content="index, follow">
+  <title>MTJS JS Runtime - High-Performance JavaScript for Backend</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      return (
+        <div className="min-h-screen flex flex-col">
+          {/* Header */}
+          <header className="bg-blue-600 text-white py-6">
+            <div className="container mx-auto px-4 text-center">
+              <h1 className="text-4xl font-bold">MTJS JS Runtime</h1>
+              <p className="mt-2 text-lg">High-Performance JavaScript Runtime for Server-Side Applications</p>
+              <a
+                href="https://github.com/akakist/mtjs"
+                className="mt-4 inline-block bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-200"
+              >
+                View on GitHub
+              </a>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="container mx-auto px-4 py-12 flex-grow">
+            {/* Key Features */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Key Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">High Performance</h3>
+                  <p className="mt-2 text-gray-600">Handles up to 480k+ HTTP requests per second with dual-thread processing.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">RPC</h3>
+                  <p className="mt-2 text-gray-600">Supports 300k requests per second with built-in routing and backroute responses.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">Telnet Interface</h3>
+                  <p className="mt-2 text-gray-600">Cisco-inspired management for easy server configuration and administration.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">Cross-Platform</h3>
+                  <p className="mt-2 text-gray-600">Seamlessly runs in Docker for easy integration and testing.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Performance Results */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Performance Results</h2>
+              <p className="text-gray-600 mb-4">
+                Tests conducted using Apache Benchmark (<code>ab -n 1000000 -k -c 100 http://127.0.0.1:6012/</code>) on an Ubuntu VM (ARM64, m4) with dual threads:
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse bg-white shadow-md rounded-lg">
+                  <thead>
+                    <tr className="bg-gray-200">
+                      <th className="p-4">Software</th>
+                      <th className="p-4">Requests per Second (RPS)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="p-4">MTJS</td>
+                      <td className="p-4">240342.56 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">uServer</td>
+                      <td className="p-4">222193.68 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Go</td>
+                      <td className="p-4">211944.02 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Boost.Asio</td>
+                      <td className="p-4">91792.11 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Node.js</td>
+                      <td className="p-4">18192.07 * 2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-gray-600">
+                <strong>Conclusion:</strong> MTJS outperforms modern C++ solutions (Boost.Asio) by over 2x and significantly surpasses Node.js and uServer.
+              </p>
+            </section>
+
+            {/* Installation */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Installation</h2>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Requirements</h3>
+              <ul className="list-disc list-inside text-gray-600 mb-4">
+                <li>Docker and Docker Compose</li>
+                <li>Access to Docker Hub for the <code>akakist/mtjs</code> image</li>
+              </ul>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Quick Start</h3>
+              <ol className="list-decimal list-inside text-gray-600 mb-4">
+                <li>
+                  Clone the repository or prepare the <code>docker-compose.yml</code>:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    git clone https://github.com/akakist/mtjs.git<br />
+                    cd mtjs/mtjs
+                  </pre>
+                </li>
+                <li>
+                  Launch the container using Docker Compose:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    docker compose up
+                  </pre>
+                </li>
+                <li>
+                  Alternatively, pull and run the image directly:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    docker pull akakist/mtjs<br />
+                    docker run -it akakist/mtjs
+                  </pre>
+                </li>
+              </ol>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Running Tests</h3>
+              <ol className="list-decimal list-inside text-gray-600">
+                <li>
+                  Inside the container, execute:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    cd /mtjs/dist<br />
+                    ls
+                  </pre>
+                </li>
+                <li>
+                  Run tests starting with <code>t_*.js</code>:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    ./t_*.js
+                  </pre>
+                </li>
+              </ol>
+            </section>
+
+            {/* Performance Testing */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Performance Testing</h2>
+              <p className="text-gray-600 mb-4">
+                To replicate the benchmarks, use Apache Benchmark:
+              </p>
+              <pre className="bg-gray-800 text-white p-4 rounded-lg">
+                ab -n 1000000 -k -c 100 http://127.0.0.1:6012/
+              </pre>
+              <p className="text-gray-600 mt-4">Ensure the server is running on port 6012.</p>
+            </section>
+
+            {/* Binary */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Binary</h2>
+              <p className="text-gray-600 mb-4">
+                The binary executable was built on Ubuntu in static mode and copied to a lightweight Alpine image. You can extract the file to your disk:
+              </p>
+              <pre className="bg-gray-800 text-white p-4 rounded-lg">
+                docker create --name temp_container akakist/mtjs<br />
+                docker cp temp_container:/usr/local/bin/mtjs ./mtjs
+              </pre>
+            </section>
+
+            {/* Discussion and Feedback */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Discussion and Feedback</h2>
+              <p className="text-gray-600">
+                Join the discussion on Telegram: <a href="https://t.me/storjsrun" className="text-blue-600 hover:underline">t.me/storjsrun</a>
+              </p>
+              <p className="text-gray-600 mt-2">We welcome your feedback, suggestions, and ideas for improving the project!</p>
+            </section>
+          </main>
+
+          {/* Footer */}
+          <footer className="bg-gray-800 text-white py-6">
+            <div className="container mx-auto px-4 text-center">
+              <p>&copy; 2025 MTJS JS Runtime. All rights reserved.</p>
+              <p className="mt-2">
+                <a href="https://github.com/akakist/mtjs" className="text-blue-400 hover:underline">GitHub</a> | 
+                <a href="https://t.me/storjsrun" className="text-blue-400 hover:underline ml-2">Telegram</a>
+              </p>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
+```<xaiArtifact artifact_id="25476e8e-2cf6-48b2-a049-dca5dd8708c0" artifact_version_id="9552586a-931a-40f7-b8a4-99792fba96eb" title="index.html" contentType="text/html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MTJS JS Runtime - A high-performance JavaScript runtime for server-side applications with exceptional HTTP processing speed, built-in RPC, and Telnet-based management.">
+  <meta name="keywords" content="JavaScript runtime, server-side JavaScript, MTJS, high-performance backend, RPC, Telnet, GitHub Pages">
+  <meta name="robots" content="index, follow">
+  <title>MTJS JS Runtime - High-Performance JavaScript for Backend</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      return (
+        <div className="min-h-screen flex flex-col">
+          {/* Header */}
+          <header className="bg-blue-600 text-white py-6">
+            <div className="container mx-auto px-4 text-center">
+              <h1 className="text-4xl font-bold">MTJS JS Runtime</h1>
+              <p className="mt-2 text-lg">High-Performance JavaScript Runtime for Server-Side Applications</p>
+              <a
+                href="https://github.com/akakist/mtjs"
+                className="mt-4 inline-block bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-200"
+              >
+                View on GitHub
+              </a>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="container mx-auto px-4 py-12 flex-grow">
+            {/* Key Features */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Key Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">High Performance</h3>
+                  <p className="mt-2 text-gray-600">Handles up to 480k+ HTTP requests per second with dual-thread processing.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">RPC</h3>
+                  <p className="mt-2 text-gray-600">Supports 300k requests per second with built-in routing and backroute responses.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">Telnet Interface</h3>
+                  <p className="mt-2 text-gray-600">Cisco-inspired management for easy server configuration and administration.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">Cross-Platform</h3>
+                  <p className="mt-2 text-gray-600">Seamlessly runs in Docker for easy integration and testing.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Performance Results */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Performance Results</h2>
+              <p className="text-gray-600 mb-4">
+                Tests conducted using Apache Benchmark (<code>ab -n 1000000 -k -c 100 http://127.0.0.1:6012/</code>) on an Ubuntu VM (ARM64, m4) with dual threads:
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse bg-white shadow-md rounded-lg">
+                  <thead>
+                    <tr className="bg-gray-200">
+                      <th className="p-4">Software</th>
+                      <th className="p-4">Requests per Second (RPS)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="p-4">MTJS</td>
+                      <td className="p-4">240342.56 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">uServer</td>
+                      <td className="p-4">222193.68 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Go</td>
+                      <td className="p-4">211944.02 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Boost.Asio</td>
+                      <td className="p-4">91792.11 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Node.js</td>
+                      <td className="p-4">18192.07 * 2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-gray-600">
+                <strong>Conclusion:</strong> MTJS outperforms modern C++ solutions (Boost.Asio) by over 2x and significantly surpasses Node.js and uServer.
+              </p>
+            </section>
+
+            {/* Installation */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Installation</h2>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Requirements</h3>
+              <ul className="list-disc list-inside text-gray-600 mb-4">
+                <li>Docker and Docker Compose</li>
+                <li>Access to Docker Hub for the <code>akakist/mtjs</code> image</li>
+              </ul>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Quick Start</h3>
+              <ol className="list-decimal list-inside text-gray-600 mb-4">
+                <li>
+                  Clone the repository or prepare the <code>docker-compose.yml</code>:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    git clone https://github.com/akakist/mtjs.git<br />
+                    cd mtjs/mtjs
+                  </pre>
+                </li>
+                <li>
+                  Launch the container using Docker Compose:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    docker compose up
+                  </pre>
+                </li>
+                <li>
+                  Alternatively, pull and run the image directly:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    docker pull akakist/mtjs<br />
+                    docker run -it akakist/mtjs
+                  </pre>
+                </li>
+              </ol>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Running Tests</h3>
+              <ol className="list-decimal list-inside text-gray-600">
+                <li>
+                  Inside the container, execute:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    cd /mtjs/dist<br />
+                    ls
+                  </pre>
+                </li>
+                <li>
+                  Run tests starting with <code>t_*.js</code>:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    ./t_*.js
+                  </pre>
+                </li>
+              </ol>
+            </section>
+
+            {/* Performance Testing */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Performance Testing</h2>
+              <p className="text-gray-600 mb-4">
+                To replicate the benchmarks, use Apache Benchmark:
+              </p>
+              <pre className="bg-gray-800 text-white p-4 rounded-lg">
+                ab -n 1000000 -k -c 100 http://127.0.0.1:6012/
+              </pre>
+              <p className="text-gray-600 mt-4">Ensure the server is running on port 6012.</p>
+            </section>
+
+            {/* Binary */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Binary</h2>
+              <p className="text-gray-600 mb-4">
+                The binary executable was built on Ubuntu in static mode and copied to a lightweight Alpine image. You can extract the file to your disk:
+              </p>
+              <pre className="bg-gray-800 text-white p-4 rounded-lg">
+                docker create --name temp_container akakist/mtjs<br />
+                docker cp temp_container:/usr/local/bin/mtjs ./mtjs
+              </pre>
+            </section>
+
+            {/* Discussion and Feedback */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Discussion and Feedback</h2>
+              <p className="text-gray-600">
+                Join the discussion on Telegram: <a href="https://t.me/storjsrun" className="text-blue-600 hover:underline">t.me/storjsrun</a>
+              </p>
+              <p className="text-gray-600 mt-2">We welcome your feedback, suggestions, and ideas for improving the project!</p>
+            </section>
+          </main>
+
+          {/* Footer */}
+          <footer className="bg-gray-800 text-white py-6">
+            <div className="container mx-auto px-4 text-center">
+              <p>&copy; 2025 MTJS JS Runtime. All rights reserved.</p>
+              <p className="mt-2">
+                <a href="https://github.com/akakist/mtjs" className="text-blue-400 hover:underline">GitHub</a> | 
+                <a href="https://t.me/storjsrun" className="text-blue-400 hover:underline ml-2">Telegram</a>
+              </p>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
+</xaiArtifact>```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MTJS JS Runtime - A high-performance JavaScript runtime for server-side applications with exceptional HTTP processing speed, built-in RPC, and Telnet-based management.">
+  <meta name="keywords" content="JavaScript runtime, server-side JavaScript, MTJS, high-performance backend, RPC, Telnet, GitHub Pages">
+  <meta name="robots" content="index, follow">
+  <title>MTJS JS Runtime - High-Performance JavaScript for Backend</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      return (
+        <div className="min-h-screen flex flex-col">
+          {/* Header */}
+          <header className="bg-blue-600 text-white py-6">
+            <div className="container mx-auto px-4 text-center">
+              <h1 className="text-4xl font-bold">MTJS JS Runtime</h1>
+              <p className="mt-2 text-lg">High-Performance JavaScript Runtime for Server-Side Applications</p>
+              <a
+                href="https://github.com/akakist/mtjs"
+                className="mt-4 inline-block bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-200"
+              >
+                View on GitHub
+              </a>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="container mx-auto px-4 py-12 flex-grow">
+            {/* Key Features */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Key Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">High Performance</h3>
+                  <p className="mt-2 text-gray-600">Handles up to 480k+ HTTP requests per second with dual-thread processing.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">RPC</h3>
+                  <p className="mt-2 text-gray-600">Supports 300k requests per second with built-in routing and backroute responses.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">Telnet Interface</h3>
+                  <p className="mt-2 text-gray-600">Cisco-inspired management for easy server configuration and administration.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800">Cross-Platform</h3>
+                  <p className="mt-2 text-gray-600">Seamlessly runs in Docker for easy integration and testing.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Performance Results */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Performance Results</h2>
+              <p className="text-gray-600 mb-4">
+                Tests conducted using Apache Benchmark (<code>ab -n 1000000 -k -c 100 http://127.0.0.1:6012/</code>) on an Ubuntu VM (ARM64, m4) with dual threads:
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse bg-white shadow-md rounded-lg">
+                  <thead>
+                    <tr className="bg-gray-200">
+                      <th className="p-4">Software</th>
+                      <th className="p-4">Requests per Second (RPS)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="p-4">MTJS</td>
+                      <td className="p-4">240342.56 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">uServer</td>
+                      <td className="p-4">222193.68 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Go</td>
+                      <td className="p-4">211944.02 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Boost.Asio</td>
+                      <td className="p-4">91792.11 * 2</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4">Node.js</td>
+                      <td className="p-4">18192.07 * 2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-gray-600">
+                <strong>Conclusion:</strong> MTJS outperforms modern C++ solutions (Boost.Asio) by over 2x and significantly surpasses Node.js and uServer.
+              </p>
+            </section>
+
+            {/* Installation */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Installation</h2>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Requirements</h3>
+              <ul className="list-disc list-inside text-gray-600 mb-4">
+                <li>Docker and Docker Compose</li>
+                <li>Access to Docker Hub for the <code>akakist/mtjs</code> image</li>
+              </ul>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Quick Start</h3>
+              <ol className="list-decimal list-inside text-gray-600 mb-4">
+                <li>
+                  Clone the repository or prepare the <code>docker-compose.yml</code>:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    git clone https://github.com/akakist/mtjs.git<br />
+                    cd mtjs/mtjs
+                  </pre>
+                </li>
+                <li>
+                  Launch the container using Docker Compose:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    docker compose up
+                  </pre>
+                </li>
+                <li>
+                  Alternatively, pull and run the image directly:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    docker pull akakist/mtjs<br />
+                    docker run -it akakist/mtjs
+                  </pre>
+                </li>
+              </ol>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Running Tests</h3>
+              <ol className="list-decimal list-inside text-gray-600">
+                <li>
+                  Inside the container, execute:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    cd /mtjs/dist<br />
+                    ls
+                  </pre>
+                </li>
+                <li>
+                  Run tests starting with <code>t_*.js</code>:
+                  <pre className="bg-gray-800 text-white p-4 rounded-lg mt-2">
+                    ./t_*.js
+                  </pre>
+                </li>
+              </ol>
+            </section>
+
+            {/* Performance Testing */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Performance Testing</h2>
+              <p className="text-gray-600 mb-4">
+                To replicate the benchmarks, use Apache Benchmark:
+              </p>
+              <pre className="bg-gray-800 text-white p-4 rounded-lg">
+                ab -n 1000000 -k -c 100 http://127.0.0.1:6012/
+              </pre>
+              <p className="text-gray-600 mt-4">Ensure the server is running on port 6012.</p>
+            </section>
+
+            {/* Binary */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Binary</h2>
+              <p className="text-gray-600 mb-4">
+                The binary executable was built on Ubuntu in static mode and copied to a lightweight Alpine image. You can extract the file to your disk:
+              </p>
+              <pre className="bg-gray-800 text-white p-4 rounded-lg">
+                docker create --name temp_container akakist/mtjs<br />
+                docker cp temp_container:/usr/local/bin/mtjs ./mtjs
+              </pre>
+            </section>
+
+            {/* Discussion and Feedback */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Discussion and Feedback</h2>
+              <p className="text-gray-600">
+                Join the discussion on Telegram: <a href="https://t.me/storjsrun" className="text-blue-600 hover:underline">t.me/storjsrun</a>
+              </p>
+              <p className="text-gray-600 mt-2">We welcome your feedback, suggestions, and ideas for improving the project!</p>
+            </section>
+          </main>
+
+          {/* Footer */}
+          <footer className="bg-gray-800 text-white py-6">
+            <div className="container mx-auto px-4 text-center">
+              <p>&copy; 2025 MTJS JS Runtime. All rights reserved.</p>
+              <p className="mt-2">
+                <a href="https://github.com/akakist/mtjs" className="text-blue-400 hover:underline">GitHub</a> | 
+                <a href="https://t.me/storjsrun" className="text-blue-400 hover:underline ml-2">Telegram</a>
+              </p>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
