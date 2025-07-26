@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://akakist.github.io/sitemap.xml
