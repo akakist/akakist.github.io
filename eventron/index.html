@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Studio.h — разработка систем для финтеха, IoT, embedded на Eventron (800k RPS, 2 потока) и mtjs (~507k RPS, 8 MB)">
+    <meta name="keywords" content="Studio.h, Eventron, mtjs, финтех, IoT, embedded, C++, RPC, Docker, Telnet">
+    <meta name="robots" content="index, follow">
+    <link rel="alternate" hreflang="ru" href="https://akakist.github.io/index.html">
+    <link rel="alternate" hreflang="en" href="https://akakist.github.io/index-en.html">
+    <title>Studio.h - Eventron & mtjs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-mono">
+    <!-- Шапка -->
+    <header class="bg-gray-800 py-4 text-center">
+        <h1 class="text-3xl font-bold">Studio.h</h1>
+        <nav class="mt-2">
+            <a href="index.html" class="px-2 font-bold">Русский</a>
+            <a href="index-en.html" class="px-2">English</a>
+        </nav>
+    </header>
+
+    <!-- Введение -->
+    <section class="py-8 px-4 md:px-20">
+        <h2 class="text-2xl font-bold mb-4">О Studio.h</h2>
+        <p class="text-lg max-w-3xl mx-auto">Мы — команда разработчиков на C/C++, создаём высокопроизводительные бэкенды и распределённые системы на *nix с использованием фреймворка Eventron.</p>
+    </section>
+
+    <!-- Eventron -->
+    <section class="py-8 px-4 md:px-20 bg-gray-800">
+        <h2 class="text-2xl font-bold mb-4">Eventron: Фреймворк для распределённых систем</h2>
+        <p class="text-lg max-w-3xl mx-auto mb-4">Eventron — событийно-ориентированный фреймворк для финтеха, IoT, embedded. Основные особенности:</p>
+        <ul class="list-disc list-inside text-lg max-w-3xl mx-auto">
+            <li><strong>Производительность</strong>: 800k RPS (2 потока × ~400k, ab -n 1000000 -k -c 100) на Ubuntu 24.04 (6 CPU, 6 GB RAM). Сравнимо с Go (fasthttp) и Rust, в 2.5 раза быстрее Boost.</li>
+            <li><strong>Событийная архитектура</strong>: Сервисы обрабатывают события внутри процесса или через кастомный RPC между процессами (300k RPS).</li>
+            <li><strong>Изоляция</strong>: Сервисы — плагины (*.so), загружаемые on-demand, с изолированным кодом для распределённой разработки.</li>
+            <li><strong>Многопоточность</strong>: Каждый сервис в отдельном потоке с собственным event loop, упрощающим разработку (однопоточное программирование).</li>
+            <li><strong>Гибкость</strong>: Поддержка монолитов и распределённых систем. События с/без указания destination sockaddr.</li>
+        </ul>
+    </section>
+
+    <!-- mtjs -->
+    <section class="py-8 px-4 md:px-20">
+        <h2 class="text-2xl font-bold mb-4">mtjs: JS Runtime на Eventron</h2>
+        <p class="text-lg max-w-3xl mx-auto mb-4">mtjs — компактный JS runtime (8 MB) на базе QuickJS, использующий Eventron. Достигает ~507k RPS (2 потока: 259k + 248k RPS) или 379k RPS в однопоточном режиме. Поддерживает Telnet-интерфейс и RPC (300k RPS). Идеален для финтеха, IoT, embedded.</p>
+        <p class="text-lg max-w-3xl mx-auto mb-4">Пример кода HTTP-сервера:</p>
+        <pre class="bg-gray-700 p-4 rounded-lg text-green-400 max-w-3xl mx-auto">
+const http = mtjs.http;
+http.createServer((req, res) => res.end("Hello, mtjs!")).listen(6012);
+        </pre>
+        <p class="text-lg max-w-3xl mx-auto mt-4">Запустите в Docker:</p>
+        <pre class="bg-gray-700 p-4 rounded-lg text-green-400 max-w-3xl mx-auto">
+git clone https://github.com/akakist/mtjs.git
+cd mtjs/mtjs
+docker compose up
+        </pre>
+        <a href="https://hub.docker.com/r/akakist/mtjs" class="block mx-auto mt-4 bg-green-500 text-black py-2 px-4 rounded-lg font-semibold hover:bg-green-600 text-center max-w-xs">Скачать mtjs</a>
+    </section>
+
+    <!-- Тесты -->
+    <section class="py-8 px-4 md:px-20 bg-gray-800">
+        <h2 class="text-2xl font-bold mb-4">Тесты производительности</h2>
+        <p class="text-lg max-w-3xl mx-auto mb-4">Тестирование проводилось на Ubuntu 24.04 (ARM64, 6 CPU, 6 GB RAM, MacBook M4) с <code>ab -n 1000000 -k -c 100 http://127.0.0.1:6012/</code> в двух потоках:</p>
+        <table class="table-auto border-collapse border border-gray-700 max-w-3xl mx-auto mb-4">
+            <thead>
+                <tr class="bg-gray-700">
+                    <th class="border border-gray-600 px-4 py-2">Программное обеспечение</th>
+                    <th class="border border-gray-600 px-4 py-2">RPS (2 потока)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">mtjs</td>
+                    <td class="border border-gray-600 px-4 py-2">~507,841.25 (259k + 248k)</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">uServer</td>
+                    <td class="border border-gray-600 px-4 py-2">444,387.36 (~222k × 2)</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Go</td>
+                    <td class="border border-gray-600 px-4 py-2">423,888.04 (~212k × 2)</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Boost.Asio</td>
+                    <td class="border border-gray-600 px-4 py-2">183,584.22 (~92k × 2)</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Node.js</td>
+                    <td class="border border-gray-600 px-4 py-2">36,384.14 (~18k × 2)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-lg max-w-3xl mx-auto mb-4">Вывод ab для mtjs (один поток):</p>
+        <pre class="bg-gray-700 p-4 rounded-lg text-green-400 max-w-3xl mx-auto">
+Requests per second: 379202.85 [#/sec] (mean)
+Time per request: 0.264 [ms] (mean)
+Time per request: 0.003 [ms] (mean, across all concurrent requests)
+Transfer rate: 65556.77 [Kbytes/sec]
+        </pre>
+        <p class="text-lg max-w-3xl mx-auto">RPC: ~300k RPS для передачи сообщений между нодами с маршрутизацией.</p>
+    </section>
+
+    <!-- Примеры использования -->
+    <section class="py-8 px-4 md:px-20">
+        <h2 class="text-2xl font-bold mb-4">Примеры использования</h2>
+        <p class="text-lg max-w-3xl mx-auto mb-4">Eventron и mtjs подходят для сложных распределённых систем:</p>
+        <ul class="list-disc list-inside text-lg max-w-3xl mx-auto">
+            <li><strong>Финтех</strong>: Высокопроизводительные бэкенды для транзакций (800k RPS).</li>
+            <li><strong>IoT</strong>: Агрегация данных с датчиков, управление через GUI, кастомный RPC (300k RPS).</li>
+            <li><strong>Embedded</strong>: Компактный бинарник mtjs (8 MB) для устройств с ограниченными ресурсами.</li>
+            <li><strong>Кастомизация mtjs</strong>: Интеграция с Kafka, Redis, бизнес-логика в JS.</li>
+        </ul>
+        <p class="text-lg max-w-3xl mx-auto mt-4">Пример: IoT-платформа с mtjs и Kafka для обработки 500k событий/сек.</p>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="py-8 px-4 md:px-20 bg-gray-800">
+        <h2 class="text-2xl font-bold mb-4 text-center">Свяжитесь с нами</h2>
+        <div class="text-lg max-w-3xl mx-auto text-center">
+            <p>Telegram: <a href="https://t.me/storjsrun" class="underline">@storjsrun</a> (группа), <a href="https://t.me/akakist" class="underline">@akakist</a> (разработчик)</p>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-800 py-4 text-center">
+        <p>© 2025 Studio.h. Powered by Eventron. <a href="https://hub.docker.com/r/akakist/mtjs" class="underline">Docker Hub</a> | Telegram: <a href="https://t.me/storjsrun" class="underline">@storjsrun</a>, <a href="https://t.me/akakist" class="underline">@akakist</a></p>
+    </footer>
+</body>
+</html>
